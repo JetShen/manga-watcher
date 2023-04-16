@@ -15,7 +15,7 @@ class Form(QDialog):
         self.setLayout(layout)
         self.button.clicked.connect(self.search)
 
-    # Greets the user
+    #
     def search(self):
         library(self.edit.text())
 

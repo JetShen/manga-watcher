@@ -4,7 +4,6 @@ from bs4 import BeautifulSoup
 # #si la ruta no tiene el tag i buscar el nombre en el tag a
 
 def library(query):
-    # query = str(input("Introducir serie: "))
     query = str(query)
     print("Estado de query: ", str(query))
     query = query.replace(' ', '+')
