@@ -19,7 +19,8 @@ class MainWindow(QWidget):
         super().__init__()
 
         # Crear la lista y agregar algunos libros
-        self.books = [{'title': 'Manga 1'}, {'title': 'Manga 2'}, {'title': 'Manga 3'}, {'title': 'Manga 4'}]
+        self.books = [{
+            'title': 'Manga 1'}, {'title': 'Manga 2'}, {'title': 'Manga 3'}, {'title': 'Manga 4'}]
         self.books_list = QListWidget()
 
         for book in self.books:
