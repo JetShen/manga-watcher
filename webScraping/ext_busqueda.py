@@ -1,11 +1,8 @@
 import requests
 from bs4 import BeautifulSoup
-#busqueda de maximo 5 titulos por momento
-# #si la ruta no tiene el tag i buscar el nombre en el tag a
 
 def library(query):
     query = str(query)
-    print("Estado de query: ", str(query))
     query = query.replace(' ', '+')
     page = requests.get("https://www.mangaupdates.com/search.html?search="+query)
     soup = BeautifulSoup(page.text ,'html.parser')
@@ -19,9 +16,5 @@ def library(query):
             "link": str(search_one['href'])
         }
         lista.append(manga)
-
-    for i in lista:
-        print(i)
-
     return lista
 
