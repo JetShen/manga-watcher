@@ -8,7 +8,9 @@ def WriteF(manga):
 
 def ReadF():
     with open('jsonUtils/fav.json', 'r') as f:
+        
         fav = json.load(f)
+        print("called: ",fav)
     return fav
 
 

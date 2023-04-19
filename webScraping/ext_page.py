@@ -7,15 +7,14 @@ def Manga(link):
     title = soup.select_one('#main_content > div:nth-child(2) > div.row.no-gutters > div.col-12.p-2 > span.releasestitle.tabletitle').text
     img =soup.select_one('#main_content > div:nth-child(2) > div.row.no-gutters > div:nth-child(4) > div:nth-child(2) > center > img')['src']
 
-    lastChapther = soup.select_one('#main_content > div:nth-child(2) > div.row.no-gutters > div:nth-child(3) > div:nth-child(17) > i:nth-child(1)')
+    lastChapters  = soup.select_one('#main_content > div:nth-child(2) > div.row.no-gutters > div:nth-child(3) > div:nth-child(17) > i:nth-child(1)')
     try:
-        lastChapther = lastChapther.text
+        lastChapters  = lastChapters .text
     except:
-        if ( lastChapther == None):
-            lastChapther = soup.select_one('#main_content > div:nth-child(2) > div.row.no-gutters > div:nth-child(3) > div:nth-child(20)').text
-            lastChapther.replace('\n', '')
+        if ( lastChapters  == None):
+            lastChapters  = soup.select_one('#main_content > div:nth-child(2) > div.row.no-gutters > div:nth-child(3) > div:nth-child(20)').text
+            lastChapters .replace('\n', '')
 
-    print("lastChapther: ",lastChapther)
     genres = []
     for i in range(1, 5):
         g = soup.select_one('#main_content > div:nth-child(2) > div.row.no-gutters > div:nth-child(4) > div:nth-child(5) > a:nth-child('+str(i)+') > u').text
@@ -25,7 +24,7 @@ def Manga(link):
         'title': str(title),
         'url': str(link),
         'img': str(img),
-        'Chapthers': str(lastChapther),
+        'Chapters ': str(lastChapters ),
         'genres': genres
     }
 
