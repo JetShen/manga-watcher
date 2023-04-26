@@ -37,7 +37,6 @@ class SearchWidget(QWidget):
         if item is not None:
             manga = self.find_manga(item.text())
             new_manga = Manga(manga['link'])
-            print("writed")
             WriteS(new_manga)
 
 

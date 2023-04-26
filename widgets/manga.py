@@ -1,8 +1,7 @@
 from PySide6.QtWidgets import *
 from PySide6.QtCore import Qt
 from PySide6.QtGui import QPixmap
-from jsonUtils.json_utils import ReadS
-from PySide6.QtCore import QTimer
+from jsonUtils.json_utils import ReadS, WriteF, ReadF
 import requests
 
 class About_manga(QWidget):
@@ -30,6 +29,10 @@ class About_manga(QWidget):
         layout.addWidget(self.btn_refresh)
         self.btn_refresh.clicked.connect(self.refresh)
 
+        self.add_btn = QPushButton("Add Manga to Library")
+        layout.addWidget(self.add_btn)
+        self.add_btn.clicked.connect(self.add_manga)
+
         self.setLayout(layout)
 
 
@@ -51,11 +54,24 @@ class About_manga(QWidget):
             self.img.setPixmap(pixel)
             self.chapters.setText(f"Chapters: {manga['Chapters']}")
             self.genders.setText(f"Genders: {manga['Genders']}")
-                        
+            self.btn_refresh.setText("Refresh")
+            self.add_btn.setText("Add Manga to Library")    
         except:
-            print("failed to load manga")
+            self.btn_refresh.setText("Error loading")
 
         
+    def add_manga(self):
+        try:
+            manga = ReadS()
+            try:
+                library = ReadF()
+                library.append(manga)
+                WriteF(library)
+            except:
+                WriteF([manga])
+            self.add_btn.setText("manga added")
+        except:
+            self.add_btn.setText("Error adding manga")
 
 
         
