@@ -14,10 +14,10 @@ class MainWindow(QMainWindow):
 
         # Crear un QTabWidget y agregar las pestañas
         tab_widget = QTabWidget()
-        tab_widget.addTab(LibraryWidget(), "Biblioteca")
-        tab_widget.addTab(SearchWidget(), "Buscar")
+        tab_widget.addTab(LibraryWidget(), "Library")
+        tab_widget.addTab(SearchWidget(), "Search")
         tab_widget.addTab(About_manga(), "Manga")
-        tab_widget.addTab(ConfigWidget(), "Configuración")
+        tab_widget.addTab(ConfigWidget(), "Config")
 
         # Agregar el QTabWidget como widget central de la ventana principal
         self.setCentralWidget(tab_widget)
