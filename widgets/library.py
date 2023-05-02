@@ -8,7 +8,7 @@ class LibraryWidget(QWidget):
         super().__init__()
 
         # Add refresh button
-        botonRefrescar = QPushButton("Refrescar")
+        botonRefrescar = QPushButton("Refresh")
         botonRefrescar.setStyleSheet("background-color: red; color: white;")
         botonRefrescar.clicked.connect(self.cLayout)
         layoutBoton = QHBoxLayout()
