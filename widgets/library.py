@@ -7,7 +7,7 @@ class LibraryWidget(QWidget):
     def __init__(self):
         super().__init__()
 
-        #Add refresh button
+        # Add refresh button
         botonRefrescar = QPushButton("Refrescar")
         botonRefrescar.setStyleSheet("background-color: red; color: white;")
         botonRefrescar.clicked.connect(self.cLayout)
@@ -16,12 +16,17 @@ class LibraryWidget(QWidget):
         layoutBoton.addWidget(botonRefrescar)
         layoutBoton.addStretch()
 
-        
-        layoutFrontal = QVBoxLayout()
+        # Create scroll area and set widget
+        scrollArea = QScrollArea()
+        scrollArea.setWidgetResizable(True)
+        self.innerWidget = QWidget()
         self.layoutCentral = QGridLayout()
+        self.innerWidget.setLayout(self.layoutCentral)
+        scrollArea.setWidget(self.innerWidget)
 
+        layoutFrontal = QVBoxLayout()
         layoutFrontal.addLayout(layoutBoton)
-        layoutFrontal.addLayout(self.layoutCentral)
+        layoutFrontal.addWidget(scrollArea)
 
         self.cLayout()
 
@@ -34,11 +39,14 @@ class LibraryWidget(QWidget):
     
     def cLayout(self):
 
+        # Clear the inner widget before populating with new elements
+        for i in reversed(range(self.layoutCentral.count())): 
+            self.layoutCentral.itemAt(i).widget().setParent(None)
+
         library = ReadF()
         for manga in library:
             pass
             #add system to update
-
 
         for manga in range(len(library)):
             LyManga = QVBoxLayout()#Make the layout for the manga object
@@ -69,8 +77,10 @@ class LibraryWidget(QWidget):
 
             #add to the grid int(rows) and int(columns) 
             self.layoutCentral.addLayout(LyManga, manga // 2, manga % 2)
-        
-        return self.layoutCentral
 
+        # Update the inner widget size and repaint it
+        self.innerWidget.adjustSize()
+        self.innerWidget.repaint()
+        
 if __name__ == '__main__':
     pass
