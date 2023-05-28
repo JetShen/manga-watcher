@@ -4,42 +4,36 @@ from bs4 import BeautifulSoup
 def Manga(link):
     page = requests.get(str(link))
     soup = BeautifulSoup(page.text ,'html.parser')
-    title = soup.select_one('#main_content > div:nth-child(2) > div.row.no-gutters > div.col-12.p-2 > span.releasestitle.tabletitle').text
-    img =soup.select_one('#main_content > div:nth-child(2) > div.row.no-gutters > div:nth-child(4) > div:nth-child(2) > center > img')['src']
+    title = soup.select_one('#siteContainer > h1').text
+    img =soup.select_one('#entry > div.pure-1.md-2-3 > div > div.pure-1-2.md-1-3 > div > img')['src']
 
     img_split = img.rsplit('/',1) 
+    img_split = img_split[1]
+    #extract and make a better name for the path
+    img_split = img_split.split("t=")[1]
+    img_split = f"{img_split}.png"
 
-    lastChapters  = soup.select_one('#main_content > div:nth-child(2) > div.row.no-gutters > div:nth-child(3) > div:nth-child(17) > i:nth-child(1)')
-    try:
-        lastChapters  = lastChapters .text
-    except:
-        if ( lastChapters  == None):
-            lastChapters  = soup.select_one('#main_content > div:nth-child(2) > div.row.no-gutters > div:nth-child(3) > div:nth-child(20)').text
-            lastChapters .replace('\n', '')
-
-    lastRelease =  soup.select_one('#main_content > div:nth-child(2) > div.row.no-gutters > div:nth-child(3) > div:nth-child(17) > i:nth-child(1)').text
-    if (int(lastRelease)>int(lastChapters)):
-        lastChapters = lastRelease
+    lastChapters  = soup.select_one('#siteContainer > section.pure-g.entryBar > div:nth-child(1)').text
+    parts = lastChapters.split("Ch:")
+    #Get the second part after "Ch"
+    lastChapters = parts[1]
+    # Remove whitespace at the beginning and end of the string
+    lastChapters = lastChapters.strip()
         
 
     Genders = []
-    pop = False
-    for i in range(1, 5):
-        try:
-            g = soup.select_one('#main_content > div:nth-child(2) > div.row.no-gutters > div:nth-child(4) > div:nth-child(5) > a:nth-child('+str(i)+') > u').text
-            Genders.append(str(g))
-        except:
-            pop=True
+    for i in range(1, 6):
+        g = soup.select_one(f'#entry > div.pure-1.md-2-3 > div > div.pure-1.md-3-5 > div.tags > ul > li:nth-child({i}) > a').text
+        g = g.strip()
+        Genders.append(str(g))
 
-    if(pop):
-        Genders.pop()
 
 
     manga = {
         'title': str(title),
         'url': str(link),
         'img_link': str(img),
-        'img_path':str(img_split[1]),
+        'img_path':str(img_split),
         'Chapters': str(lastChapters ),
         'Genders': Genders
     }

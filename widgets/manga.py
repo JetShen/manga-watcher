@@ -56,7 +56,8 @@ class About_manga(QWidget):
             self.genders.setText(f"Genders: {manga['Genders']}")
             self.btn_refresh.setText("Refresh")
             self.add_btn.setText("Add Manga to Library")    
-        except:
+        except Exception as e:
+            print(e)
             self.btn_refresh.setText("Error loading")
 
         
