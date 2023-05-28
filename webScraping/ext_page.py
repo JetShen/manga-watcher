@@ -17,6 +17,11 @@ def Manga(link):
             lastChapters  = soup.select_one('#main_content > div:nth-child(2) > div.row.no-gutters > div:nth-child(3) > div:nth-child(20)').text
             lastChapters .replace('\n', '')
 
+    lastRelease =  soup.select_one('#main_content > div:nth-child(2) > div.row.no-gutters > div:nth-child(3) > div:nth-child(17) > i:nth-child(1)').text
+    if (int(lastRelease)>int(lastChapters)):
+        lastChapters = lastRelease
+        
+
     Genders = []
     pop = False
     for i in range(1, 5):

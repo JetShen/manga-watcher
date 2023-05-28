@@ -38,12 +38,21 @@ class LibraryWidget(QWidget):
 
     
     def cLayout(self):
-
-        # Clear the inner widget before populating with new elements
-        for i in reversed(range(self.layoutCentral.count())): 
-            self.layoutCentral.itemAt(i).widget().setParent(None)
-
+        count = 0
         library = ReadF()
+        for i in library:
+            count += 1
+        print(f"count: {count} \n self.layoutCentral.count(): {self.layoutCentral.count()}")
+        # Clear the inner widget before populating with new elements
+        for i in reversed(range(self.layoutCentral.count())):
+            widget = self.layoutCentral.itemAt(i).widget()
+            if widget is not None:
+                widget.setParent(None)
+
+            
+
+        
+        
         for manga in library:
             pass
             #add system to update

@@ -14,6 +14,6 @@ Date: 04/25/23
 ## To Do 
 
 - polish the data collection to avoid making mistakes as seen in the example of 'Bocchi the rock!
-- secondcreate an alert to notify which "manga" have been updated
+- second create an alert to notify which "manga" have been updated
 - Along the way there may be more bugs, so the application style will be kept simple until version 1.0 is released
 
